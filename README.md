@@ -5,6 +5,6 @@
 3.CSS
 4.Searching engine
 5.API integration
-6.Uniy conversion
+6.Unit conversion
 7.Forecast
 8.Summary
