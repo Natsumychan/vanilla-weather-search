@@ -19,11 +19,18 @@
         <div class="weather-app">
           <form action="" id="search-form" class="row mb-5">
             <div class="col-9">
-              <input type="search" placeholder="Type a city" class="form-control"
-              id="city-input" autocomplete="off">
+              <input
+                type="search"
+                placeholder="Type a city"
+                class="form-control"
+                id="city-input"
+                autocomplete="off" />
             </div>
             <div class="col-3">
-              <input type="submit" value="Search" class="btn btn-primary w-100">
+              <input
+                type="submit"
+                value="Search"
+                class="btn btn-primary w-100" />
             </div>
           </form>
           <div class="overview">
@@ -35,24 +42,21 @@
           </div>
           <div class="row">
             <div class="col-6 d-flex weather-temperature">
-                <img
-                  src=""
-                  alt=""
-                  class="weather-img" />
-                <div>
-                    <strong id="temperature"></strong>
-                    <span class="units">
-                         °C | <a href="#">°F</a> 
-                    </span>
+              <img src="" alt="" class="weather-img" />
+              <div>
+                <strong id="temperature"></strong>
+                <span class="units">
+                  <a href="#" id="celsius" class="">°C</a> | <a href="#" id="fahrenheit" class="active">°F</a>
+                </span>
               </div>
             </div>
             <div class="col-6">
               <ul>
-                <li>Humidity: 
-                    <span id="humidity"></span>
+                <li>
+                  Humidity:
+                  <span id="humidity"></span>
                 </li>
-                <li>Wind: 
-                  <span id="wind"></span></li>
+                <li>Wind: <span id="wind"></span></li>
               </ul>
             </div>
           </div>
