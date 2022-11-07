@@ -73,4 +73,17 @@ strong{
 
 a{
     text-decoration: none;
+    color:rgb(33, 33, 33) ;
+}
+
+a:hover{
+    cursor:default;
+}
+
+a.active{
+    color:blue;
+}
+
+a.active:hover {
+    cursor: pointer;
 }
