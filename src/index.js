@@ -6,9 +6,11 @@ const weatherDescription= document.querySelector("#weather-description")
 const weatherImg= document.querySelector(".weather-img")
 const humidity= document.querySelector("#humidity")
 const wind= document.querySelector("#wind")
-let week= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
+const fahrenheitLink= document.querySelector("#fahrenheit")
+const celsiusLink= document.querySelector("#celsius") 
 
-form.addEventListener("submit",handleSubmit)
+let week= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
+let celsiusTemp
 
 function handleSubmit(event){
     event.preventDefault()
@@ -42,21 +44,42 @@ function formatDate(timeStamp){
     }else{
        currentMinutes=minutes 
     }
-    console.log(currentMinutes)
     dateElement.innerText=`${day}, ${currentHours}:${currentMinutes}`
 }
 
 function displayTemperature(response){
     console.log(response.data)
+    celsiusTemp=Math.round(response.data.temperature.current) 
     nameCity.innerText=response.data.city
     weatherDescription.innerText= response.data.condition.description
     weatherImg.src=response.data.condition.icon_url
     weatherImg.setAttribute("alt",response.data.condition.description)
-    temperature.innerText=Math.round(response.data.temperature.current) 
+    temperature.innerText=celsiusTemp
     humidity.innerText=`${response.data.temperature.humidity}%`
     let windData=Math.round(response.data.wind.speed)
     wind.innerText=`${windData} Km/H`
+    
     formatDate(response.data.time*1000)
 }
+
+function displayCelsius(event){
+    event.preventDefault()
+    temperature.innerText=celsiusTemp
+    celsiusLink.classList.remove("active")
+    fahrenheitLink.classList.add("active")
+}
+
+function displayFahrenhiet(event){
+    event.preventDefault()
+    let fahrenheitTemp= Math.round((celsiusTemp * 9/5) + 32)
+    temperature.innerText=fahrenheitTemp
+    //add the active class the celsius link and remove in fahrenheit link
+    celsiusLink.classList.add("active")
+    fahrenheitLink.classList.remove("active")
+}
+
+form.addEventListener("submit",handleSubmit)
+fahrenheitLink.addEventListener("pointerdown", displayFahrenhiet)
+celsiusLink.addEventListener("pointerdown",displayCelsius)
 
 searchCity("La Ceja")
