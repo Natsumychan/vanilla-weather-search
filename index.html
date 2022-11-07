@@ -17,21 +17,30 @@
     <div class="container">
       <div class="weather-app-wrapper">
         <div class="weather-app">
+          <form action="" id="search-form" class="row mb-5">
+            <div class="col-9">
+              <input type="search" placeholder="Type a city" class="form-control"
+              id="city-input" autocomplete="off">
+            </div>
+            <div class="col-3">
+              <input type="submit" value="Search" class="btn btn-primary w-100">
+            </div>
+          </form>
           <div class="overview">
-            <h1 id="nameCity">New York</h1>
+            <h1 id="nameCity"></h1>
             <ul>
               <li>Last updated at: <span id="date"></span></li>
-              <li id="weather-description">Clear</li>
+              <li id="weather-description"></li>
             </ul>
           </div>
           <div class="row">
             <div class="col-6 d-flex weather-temperature">
                 <img
-                  src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+                  src=""
                   alt=""
                   class="weather-img" />
                 <div>
-                    <strong id="temperature">23</strong>
+                    <strong id="temperature"></strong>
                     <span class="units">
                          °C | <a href="#">°F</a> 
                     </span>
