@@ -59,6 +59,7 @@ function displayTemperature(response){
     wind.innerText=`${windData} Km/H`
     
     formatDate(response.data.time*1000)
+    displayForecast()
 }
 
 function displayCelsius(event){
@@ -75,6 +76,34 @@ function displayFahrenhiet(event){
     //add the active class the celsius link and remove in fahrenheit link
     celsiusLink.classList.add("active")
     fahrenheitLink.classList.remove("active")
+}
+
+function displayForecast(){
+    let days=["Thu","Fri","Sat","Sun"]
+    let forecastElement= document.querySelector("#forecast")
+    let forecastHTML=`<div class="row">`
+    
+    days.forEach(function (day){
+
+        forecastHTML= forecastHTML+`
+         <div class="col-2">
+             <div class="forecast-date">
+               ${day}
+             </div>
+              <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-night.png" alt="" class="forecast-img">
+              <div class="forecast-temperature">
+                <span class="forecast-max">
+                  18°
+                </span>
+                <span class="forecast-min">
+                  12°
+                </span>
+              </div>
+            </div>
+        `
+    })
+    forecastElement.innerHTML= forecastHTML +`</div>`
+
 }
 
 form.addEventListener("submit",handleSubmit)
