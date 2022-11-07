@@ -48,7 +48,6 @@ function formatDate(timeStamp){
 }
 
 function displayTemperature(response){
-    console.log(response.data)
     celsiusTemp=Math.round(response.data.temperature.current) 
     nameCity.innerText=response.data.city
     weatherDescription.innerText= response.data.condition.description

@@ -73,10 +73,13 @@ strong{
 
 a{
     text-decoration: none;
+}
+
+.temperature{
     color:rgb(33, 33, 33) ;
 }
 
-a:hover{
+.temperature:hover{
     cursor:default;
 }
 
@@ -87,3 +90,27 @@ a.active{
 a.active:hover {
     cursor: pointer;
 }
+
+.weather-forecast{
+    text-align: center;
+    color: #000;
+}
+
+.forecast-date{
+    font-size: 16px;
+    opacity: 0.5;
+}
+
+.forecast-img{
+    width: 60px;
+    height: 60px;
+}
+
+.forecast-min{
+    opacity: 0.5;
+}
+
+.forecast-temperature{
+    font-size: 13px;
+}
+
