@@ -1,3 +1,4 @@
+const form= document.querySelector("#search-form")
 const nameCity= document.querySelector("#nameCity")
 const dateElement= document.querySelector("#date")
 const temperature= document.querySelector("#temperature")
@@ -6,9 +7,22 @@ const weatherImg= document.querySelector(".weather-img")
 const humidity= document.querySelector("#humidity")
 const wind= document.querySelector("#wind")
 let week= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
-let apiKey= "te60b41a5ebo3808074c9edaf83940fc"
-let city="La Meca"
-let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`
+
+form.addEventListener("submit",handleSubmit)
+
+function handleSubmit(event){
+    event.preventDefault()
+    const cityInputElement=document.querySelector("#city-input")
+    let cityValue= cityInputElement.value
+    searchCity(cityValue)
+}
+
+function searchCity(city){
+    let apiKey= "te60b41a5ebo3808074c9edaf83940fc"
+    let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`
+
+    axios.get(apiUrl).then(displayTemperature)
+}
 
 function formatDate(timeStamp){
     //calculate the date
@@ -45,4 +59,4 @@ function displayTemperature(response){
     formatDate(response.data.time*1000)
 }
 
-axios.get(apiUrl).then(displayTemperature)
+searchCity("La Ceja")
