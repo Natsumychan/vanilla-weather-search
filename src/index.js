@@ -9,6 +9,7 @@ const wind= document.querySelector("#wind")
 const fahrenheitLink= document.querySelector("#fahrenheit")
 const celsiusLink= document.querySelector("#celsius") 
 
+let apiKey= "te60b41a5ebo3808074c9edaf83940fc"
 let week= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
 let celsiusTemp
 
@@ -17,10 +18,11 @@ function handleSubmit(event){
     const cityInputElement=document.querySelector("#city-input")
     let cityValue= cityInputElement.value
     searchCity(cityValue)
+    searchCityForecast(cityValue)
 }
 
 function searchCity(city){
-    let apiKey= "te60b41a5ebo3808074c9edaf83940fc"
+    
     let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`
 
     axios.get(apiUrl).then(displayTemperature)
@@ -78,32 +80,46 @@ function displayFahrenhiet(event){
     fahrenheitLink.classList.remove("active")
 }
 
-function displayForecast(){
-    let days=["Thu","Fri","Sat","Sun"]
+function searchCityForecast(city){
+    let apiUrl=`https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`
+    axios.get(apiUrl).then(displayForecast)
+}
+
+function displayForecast(response){
+    console.log(response.data.daily)
+    let days=response.data.daily
     let forecastElement= document.querySelector("#forecast")
     let forecastHTML=`<div class="row">`
     
-    days.forEach(function (day){
-
+    days.forEach(function (day, index){
+        if(index<6){
         forecastHTML= forecastHTML+`
          <div class="col-2">
              <div class="forecast-date">
-               ${day}
+               ${displayDay(day.time*1000)}
              </div>
-              <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-night.png" alt="" class="forecast-img">
+              <img src=${day.condition.icon_url} alt="${day.condition.description}" class="forecast-img">
               <div class="forecast-temperature">
                 <span class="forecast-max">
-                  18°
+                  ${Math.round(day.temperature.maximum)}
                 </span>
                 <span class="forecast-min">
-                  12°
+                  ${Math.round(day.temperature.minimum)}
                 </span>
               </div>
             </div>
-        `
+        `}
     })
     forecastElement.innerHTML= forecastHTML +`</div>`
 
+}
+
+function displayDay(dayStamp){
+    let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    let date = new Date(dayStamp)
+    let dayForecast= days[date.getDay()]
+    return dayForecast
+    
 }
 
 form.addEventListener("submit",handleSubmit)
@@ -111,3 +127,4 @@ fahrenheitLink.addEventListener("pointerdown", displayFahrenhiet)
 celsiusLink.addEventListener("pointerdown",displayCelsius)
 
 searchCity("La Ceja")
+ searchCityForecast("La Ceja")
