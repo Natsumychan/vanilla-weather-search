@@ -12,11 +12,12 @@ const celsiusLink= document.querySelector("#celsius")
 let apiKey= "te60b41a5ebo3808074c9edaf83940fc"
 let week= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
 let celsiusTemp
+let cityValue
 
 function handleSubmit(event){
     event.preventDefault()
     const cityInputElement=document.querySelector("#city-input")
-    let cityValue= cityInputElement.value
+    cityValue= cityInputElement.value
     searchCity(cityValue)
     searchCityForecast(cityValue)
 }
@@ -69,6 +70,7 @@ function displayCelsius(event){
     temperature.innerText=celsiusTemp
     celsiusLink.classList.remove("active")
     fahrenheitLink.classList.add("active")
+    searchCityForecast(cityValue)
 }
 
 function displayFahrenhiet(event){
@@ -78,10 +80,18 @@ function displayFahrenhiet(event){
     //add the active class the celsius link and remove in fahrenheit link
     celsiusLink.classList.add("active")
     fahrenheitLink.classList.remove("active")
+    searchForecastImperial()
+    
 }
 
+function searchForecastImperial(){
+    let apiUrl=`https://api.shecodes.io/weather/v1/forecast?query=${cityValue}&key=${apiKey}&units=imperial`
+    axios.get(apiUrl).then(displayForecast)
+}
+
+
 function searchCityForecast(city){
-    let apiUrl=`https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`
+    let apiUrl=`https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`
     axios.get(apiUrl).then(displayForecast)
 }
 
@@ -103,7 +113,7 @@ function displayForecast(response){
                 <span class="forecast-max">
                   ${Math.round(day.temperature.maximum)}
                 </span>
-                <span class="forecast-min">
+                <span class="forecast-min" id="min">
                   ${Math.round(day.temperature.minimum)}
                 </span>
               </div>
