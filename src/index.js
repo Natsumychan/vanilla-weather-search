@@ -59,7 +59,7 @@ function displayTemperature(response){
     temperature.innerText=celsiusTemp
     humidity.innerText=`${response.data.temperature.humidity}%`
     let windData=Math.round(response.data.wind.speed)
-    wind.innerText=`${windData} Km/H`
+    wind.innerText=`${windData} m/s`
     
     formatDate(response.data.time*1000)
     displayForecast()
