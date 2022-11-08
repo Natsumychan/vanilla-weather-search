@@ -12,7 +12,7 @@ const celsiusLink= document.querySelector("#celsius")
 let apiKey= "te60b41a5ebo3808074c9edaf83940fc"
 let week= ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"]
 let celsiusTemp
-let cityValue
+let cityValue= "La Ceja"
 
 function handleSubmit(event){
     event.preventDefault()
@@ -136,5 +136,5 @@ form.addEventListener("submit",handleSubmit)
 fahrenheitLink.addEventListener("pointerdown", displayFahrenhiet)
 celsiusLink.addEventListener("pointerdown",displayCelsius)
 
-searchCity("La Ceja")
- searchCityForecast("La Ceja")
+searchCity(cityValue)
+searchCityForecast(cityValue)
